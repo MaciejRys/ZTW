@@ -8,6 +8,8 @@ $admission-image: url("../images/admission.jpg");
 $child-image: url("../images/child.jpg");
 $player-image: url("../images/player.jpg");
 $header-image:  url("../images/header.jpg");
+$coach-image: url("../images/coach.jpeg");
+$awards-image: url("../images/awards.jpg");
 
 %row{
      display: flex;
@@ -20,20 +22,26 @@ $header-image:  url("../images/header.jpg");
      width: 50%;
 }
 
+%back-image{
+     background-repeat: no-repeat;
+     background-size: cover;
+}
+
 @mixin background-image($url){
      background-image: $url;
 }
 
-.section{
-     padding: 90px 0;
-     height: 40%;
-     background-color: $primary-color;
-}
-
-.section-white{
-     padding: 90px 0;
-     height: 40%;
-     background-color: $secondary-color;
+@for $i from 1 through 6 {
+     .section-#{$i} {
+          padding: 90px 0;
+          height: 40%;
+          @if $i % 2 == 1 {
+               background-color: $primary-color;
+          } @else {
+               background-color: $secondary-color;
+          }
+          
+     }
 }
 
 .container{
@@ -41,7 +49,6 @@ $header-image:  url("../images/header.jpg");
      padding-left: 15px;
      margin-right: 20%;
      margin-left: 20%;
-     height: 300px;
 }
 
 .row{
@@ -64,22 +71,35 @@ $header-image:  url("../images/header.jpg");
 
 .col-image-admission{
      @extend %col;
+     @extend %back-image;
      @include background-image($admission-image);
 }
 
 .col-image-childhood{
      @extend %col;
+     @extend %back-image;
      @include background-image($child-image);
 }
 .col-image-player{
-     @include background-image($player-image);
      @extend %col;
+     @extend %back-image;
+     @include background-image($player-image);
 }
 
+.col-image-coach {
+     @extend %col;
+     @extend %back-image;
+     @include background-image($coach-image);
+}
+
+.col-image-awards {
+     @extend %col;
+     @extend %back-image;
+     @include background-image($awards-image);
+}
 
 .header{
      height: 500px;
-
 }
 .header-text{
      text-align: center;
@@ -92,6 +112,7 @@ $header-image:  url("../images/header.jpg");
      margin-top: 0px;
 }
 .big-picture{
+     @extend %back-image;
      @include background-image($header-image);
      height: 100%;
 }
@@ -110,6 +131,7 @@ $header-image:  url("../images/header.jpg");
      font-size: 35px;
      font-weight: bold;
      text-transform: uppercase;
+     text-align: center;
 }
 
 .col-nav{
@@ -128,4 +150,27 @@ $header-image:  url("../images/header.jpg");
 .topnav a:hover {
      background-color: #ddd;
      color: black;
+}
+
+.form-section {
+     display: flex;
+     flex-direction: column;
+     flex-wrap: wrap;
+     align-items: center;
+}
+
+footer {
+     background-color: $header-color;
+     color: $header-text-color;
+     font-weight: bold;
+     text-transform: uppercase;
+     text-align: center;
+
+     h2 {
+          font-size: 35px;
+     }
+
+     h3 {
+          font-size: 25px;
+     }
 }
