@@ -57,9 +57,8 @@ public class AuthorsService implements IAuthorsService {
         } else {
             authorsRepo.remove(foundAuthor);
             //delete all books written by author
-            booksService.getItems().stream()
-                    .filter(b -> b.getAuthor().equals(foundAuthor))
-                    .forEach(b -> booksService.deleteItem(b.getId()));
+            booksService.getItems()
+                    .removeIf(b -> b.getAuthor().equals(foundAuthor));
             return true;
         }
     }
