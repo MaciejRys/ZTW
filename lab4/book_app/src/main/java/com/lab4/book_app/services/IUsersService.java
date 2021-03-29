@@ -5,4 +5,6 @@ import com.lab4.book_app.model.User;
 public interface IUsersService {
 
     boolean addUser(User user);
+
+    public abstract User getItem(int id);
 }

@@ -28,4 +28,13 @@ public class UsersService implements IUsersService{
             return false;
         }
     }
+
+    @Override
+    public User getItem(int id) {
+        return usersRepo.stream()
+                .filter(b -> b.getId() == id)
+                .findAny()
+                .orElse(null);
+    }
+
 }
