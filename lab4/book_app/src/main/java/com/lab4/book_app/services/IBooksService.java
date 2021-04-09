@@ -1,11 +1,12 @@
 package com.lab4.book_app.services;
 
+import com.lab4.book_app.model.Author;
 import com.lab4.book_app.model.Book;
 
 import java.util.Collection;
 
 public interface IBooksService {
-    public abstract boolean addItem(Book item);
+    public boolean addItem(String title, int authorId, int pages);
 
     public abstract Collection<Book> getItems();
 

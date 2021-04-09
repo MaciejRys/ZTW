@@ -17,19 +17,17 @@ public class BooksService implements IBooksService {
     private AuthorsService authorsService;
 
     @Override
-    public boolean addItem(Book item) {
+    public boolean addItem( String title, int authorid, int pages) {
+        Author author = AuthorsService.getAuthorsRepo().get(authorid);
         Book foundBook = booksRepo.stream()
-                .filter(a -> a.getId() == item.getId())
+                .filter(a -> a.getAuthor() == author && a.getTitle() == title)
                 .findAny()
                 .orElse(null);
 
-        //if book has unique id
         if(foundBook == null) {
-            booksRepo.add(item);
-            //if new author, create it
-            if(authorsService.getItem(item.getAuthor().getId()) == null) {
-                authorsService.addItem(item.getAuthor());
-            }
+            int id = booksRepo.size() + 1;
+            Book book = new Book(id, title, author, pages);
+            booksRepo.add(book);
             return true;
         } else {
             return false;
@@ -78,9 +76,9 @@ public class BooksService implements IBooksService {
             booksRepo.set(index, updated);
 
             //if updated has new author, create it
-            if(authorsService.getItem(updated.getAuthor().getId()) == null) {
-                authorsService.addItem(updated.getAuthor());
-            }
+//            if(authorsService.getItem(updated.getAuthor().getId()) == null) {
+//                authorsService.addItem(updated.getAuthor());
+//            }
             return true;
         }
     }

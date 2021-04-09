@@ -17,7 +17,7 @@ public class AuthorsController {
     IAuthorsService authorsService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Object> addAuthor(@RequestBody Author author){
+    public ResponseEntity<Object> addAuthor(@RequestBody String author){
         boolean result = authorsService.addItem(author);
 
         if(result) {

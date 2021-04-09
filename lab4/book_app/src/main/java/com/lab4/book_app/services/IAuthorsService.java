@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public interface IAuthorsService {
 
-    public abstract boolean addItem(Author item);
+    public abstract boolean addItem(String item);
 
     public abstract Collection<Author> getItems();
 

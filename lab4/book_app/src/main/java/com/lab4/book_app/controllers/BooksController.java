@@ -1,5 +1,6 @@
 package com.lab4.book_app.controllers;
 
+import com.lab4.book_app.model.Author;
 import com.lab4.book_app.model.Book;
 import com.lab4.book_app.services.IBooksService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class BooksController {
     IBooksService booksService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Object> addBook(@RequestBody Book book){
-        boolean result = booksService.addItem(book);
+    public ResponseEntity<Object> addBook(@RequestBody  String title, int authorId, int pages){
+        boolean result = booksService.addItem(title, authorId, pages);
 
         if(result) {
             return new ResponseEntity<>(result, HttpStatus.OK);

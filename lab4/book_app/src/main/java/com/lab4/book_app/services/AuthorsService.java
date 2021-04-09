@@ -18,18 +18,11 @@ public class AuthorsService implements IAuthorsService {
     private BooksService booksService;
 
     @Override
-    public boolean addItem(Author item) {
-        Author foundAuthor = authorsRepo.stream()
-                .filter(a -> a.getId() == item.getId())
-                .findAny()
-                .orElse(null);
-
-        if(foundAuthor == null) {
-            authorsRepo.add(item);
-            return true;
-        } else {
-            return false;
-        }
+    public boolean addItem(String fullName) {
+        int id = authorsRepo.size() + 1;
+        Author item = new Author(id, fullName);
+        authorsRepo.add(item);
+        return true;
     }
 
     @Override
