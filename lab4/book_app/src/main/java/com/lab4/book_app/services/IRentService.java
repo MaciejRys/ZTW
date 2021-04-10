@@ -9,9 +9,11 @@ import java.util.Map;
 
 public interface IRentService {
 
-    Map<User, ArrayList<Book>> getRents();
+    Map<String, ArrayList<Book>> getRents();
 
-    boolean rent(User user, Book book);
+    boolean rent(String user, Book book);
 
     boolean free(Book book);
+
+    boolean isRented(Book book);
 }

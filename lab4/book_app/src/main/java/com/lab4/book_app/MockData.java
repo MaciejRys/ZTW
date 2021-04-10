@@ -40,9 +40,9 @@ public class MockData implements ApplicationRunner {
         booksService.getItems().add(book2);
         booksService.getItems().add(book3);
 
-        usersService.addUser(user1);
-        usersService.addUser(user2);
+        usersService.addUser("user1");
+        usersService.addUser("user2");
 
-        rentService.rent(user1, book2);
+        rentService.rent("user1", book2);
     }
 }

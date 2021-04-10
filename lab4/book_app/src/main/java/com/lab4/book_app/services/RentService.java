@@ -13,19 +13,19 @@ import java.util.stream.Collectors;
 @Service
 public class RentService implements IRentService{
 
-    private Map<User, ArrayList<Book>> rents;
+    private Map<String, ArrayList<Book>> rents;
 
     public RentService() {
         this.rents = new HashMap<>();
     }
 
     @Override
-    public Map<User, ArrayList<Book>> getRents() {
+    public Map<String, ArrayList<Book>> getRents() {
         return rents;
     }
 
     @Override
-    public boolean rent(User user, Book book) {
+    public boolean rent(String user, Book book) {
         if(isRented(book)) {
             return false;
         } else {
@@ -56,7 +56,7 @@ public class RentService implements IRentService{
         }
     }
 
-    private boolean isRented(Book book) {
+    public boolean isRented(Book book) {
         Book foundBook = rents.values().stream()
                 .reduce(new ArrayList<Book>(), (acc, item) -> {
             acc.addAll(item);

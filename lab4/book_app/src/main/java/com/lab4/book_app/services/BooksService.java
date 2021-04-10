@@ -2,6 +2,7 @@ package com.lab4.book_app.services;
 
 import com.lab4.book_app.model.Author;
 import com.lab4.book_app.model.Book;
+import com.lab4.book_app.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,15 @@ public class BooksService implements IBooksService {
                 .findAny()
                 .orElse(null);
     }
+
+    @Override
+    public Book getItemByName(String name) {
+        return booksRepo.stream()
+                .filter(b -> b.getTitle().equals(name))
+                .findAny()
+                .orElse(null);
+    }
+
 
     @Override
     public boolean deleteItem(int id) {

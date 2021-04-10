@@ -10,9 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("rents")
 public class RentsController {
 
@@ -20,23 +23,34 @@ public class RentsController {
     IRentService rentService;
     @Autowired
     IBooksService booksService;
-    @Autowired
-    IUsersService usersService;
-
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
     ResponseEntity<Object> getRents() {
         return new ResponseEntity<>(rentService.getRents(), HttpStatus.OK);
     }
-
-    @RequestMapping(value = "/rent/{idBook}/{idUser}", method = RequestMethod.POST)
-    public ResponseEntity<Object> rent(@PathVariable("idBook") int idBook, @PathVariable("idUser") int idUser){
-        Book book = booksService.getItem(idBook);
-        User user = usersService.getItem(idUser);
-        return new ResponseEntity<>(rentService.rent(user, book), HttpStatus.OK);
+    @CrossOrigin
+    @RequestMapping(value = "/rent/{Book}/{User}", method = RequestMethod.POST)
+    public ResponseEntity<Object> rent(@PathVariable("Book") String Book, @PathVariable("User") String User){
+        Book book = booksService.getItemByName(Book);
+        return new ResponseEntity<>(rentService.rent(User, book), HttpStatus.OK);
+    }
+    @CrossOrigin
+    @RequestMapping(value = "/free/{Book}", method = RequestMethod.POST)
+    ResponseEntity<Object> free(@PathVariable("Book") String Book) {
+        Book book = booksService.getItemByName(Book);
+        return new ResponseEntity<>(rentService.free(book), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/free", method = RequestMethod.POST)
-    ResponseEntity<Object> free(@RequestBody Book book) {
-        return new ResponseEntity<>(rentService.free(book), HttpStatus.OK);
+    @CrossOrigin
+    @RequestMapping(value = "/freeBooks", method = RequestMethod.GET)
+    ResponseEntity<Object> freeBooks() {
+
+        List<Book> booksForRent = new ArrayList<>();
+        for (Book book: booksService.getItems()) {
+            if(!rentService.isRented(book)){
+                booksForRent.add(book);
+            }
+        }
+        return new ResponseEntity<>(booksForRent, HttpStatus.OK);
     }
 }

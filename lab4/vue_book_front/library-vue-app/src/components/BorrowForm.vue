@@ -1,10 +1,18 @@
 <template>
   <div id="borrow-form">
-    <form  @submit.prevent="handleSubmit">>
+    <form  @submit.prevent="handleSubmit">
       <label>Tytuł - autor</label>
-      <input v-model="borrow.title" type="text" />
+      <select v-model="borrow.book"  name="book" type="text" >
+      <option v-for="book in bookSource" :key="book">
+        {{book}}
+      </option>
+      </select>
       <label>User</label>
-      <input v-model="borrow.user" type="text" />
+      <select v-model="borrow.user"  name="user" type="text" >
+        <option v-for="user in userSource" :key="user">
+          {{user}}
+        </option>
+      </select>
       <button>Wypożycz książke</button>
     </form>
   </div>
@@ -12,6 +20,10 @@
 <script>
 export default {
   name: 'borrow-form',
+  props: {
+    bookSource: Array,
+    userSource: Array,
+  },
   data() {
     return {
       borrow: {

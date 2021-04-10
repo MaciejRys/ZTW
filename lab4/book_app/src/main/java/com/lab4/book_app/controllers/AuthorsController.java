@@ -10,12 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("authors")
 public class AuthorsController {
 
     @Autowired
     IAuthorsService authorsService;
-
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Object> addAuthor(@RequestBody String author){
         boolean result = authorsService.addItem(author);
@@ -26,12 +27,12 @@ public class AuthorsController {
             return new ResponseEntity<>(result, HttpStatus.CONFLICT);
         }
     }
-
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Object> getAuthors(){
         return new ResponseEntity<>(authorsService.getItems(), HttpStatus.OK);
     }
-
+    @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getAuthor(@PathVariable("id") int id){
         Author author = authorsService.getItem(id);
@@ -41,12 +42,12 @@ public class AuthorsController {
         } else {
             return new ResponseEntity<>(author, HttpStatus.OK);
         }    }
-
+    @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteAuthor(@PathVariable("id") int id){
         return new ResponseEntity<>(authorsService.deleteItem(id), HttpStatus.OK);
     }
-
+    @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public ResponseEntity<Object> updateAuthor(@PathVariable("id") int id, @RequestBody Author author){
         return new ResponseEntity<>(authorsService.updateItem(id, author), HttpStatus.OK);
