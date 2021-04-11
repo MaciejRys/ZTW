@@ -75,6 +75,9 @@ export default {
   mounted() {
     this.getAuthors();
   },
+  activated() {
+    this.getAuthors();
+  },
 };
 </script>
 

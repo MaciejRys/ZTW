@@ -81,7 +81,6 @@ export default {
   mounted() {
     this.getBooks();
   },
-
   activated() {
     this.getBooks();
   },
