@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="small-container">
+  <div id="book-form-view" class="small-container">
     <h1>Add book</h1>
     <div id="book-form">
       <form @submit.prevent="addBook(book)">

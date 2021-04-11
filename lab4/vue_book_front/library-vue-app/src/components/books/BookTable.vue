@@ -15,17 +15,19 @@
           <th>Id</th>
           <th>Title</th>
           <th>Author</th>
+          <th>Pages</th>
         </thead>
         <tbody>
           <tr v-for="book in books" :key="book.id">
             <td>{{ book.id }}</td>
             <td>{{ book.title }}</td>
             <td>{{ book.author.fullName }}</td>
+            <td>{{ book.pages }}</td>
             <td>
               <button
                 @click="
                   $router.push({
-                    name: 'about-something',
+                    name: 'BookUpdate',
                     params: { id: book.id },
                   })
                 "
@@ -54,7 +56,6 @@ export default {
       try {
         const response = await fetch("http://localhost:8081/books");
         const data = await response.json();
-        console.log(data);
         for (var i = 0; i < data.length; i++) {
           this.books.push(data[i]);
         }
@@ -66,13 +67,15 @@ export default {
     async deleteBook(bookId) {
       fetch("http://localhost:8081/books/" + bookId, {
         method: "DELETE",
-      }).then((respFulfilled) => {
-        this.books = this.books.filter((book) => {
-          return book.id != bookId;
+      })
+        .then((respFulfilled) => {
+          this.books = this.books.filter((book) => {
+            return book.id != bookId;
+          });
+        })
+        .catch((respRejected) => {
+          console.log(respRejected);
         });
-      }).catch(respRejected => {
-        console.log(respRejected)
-      });
     },
   },
   mounted() {
