@@ -24,6 +24,16 @@ const routes = [
     name: 'BookForm',
     component: () => import('@/components/books/BookForm.vue')
   },
+  {
+    path: '/BorrowForm',
+    name: 'BorrowForm',
+    component: () => import('@/components/Borrows/BorrowForm.vue')
+  },
+  {
+    path: '/BorrowTable',
+    name: 'BorrowTable',
+    component: () => import('@/components/Borrows/BorrowTable.vue')
+  }
 ]
 
 const router = new VueRouter({

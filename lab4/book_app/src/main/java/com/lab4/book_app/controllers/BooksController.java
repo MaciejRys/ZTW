@@ -40,6 +40,18 @@ public class BooksController {
         } else {
             return new ResponseEntity<>(book, HttpStatus.OK);
         }    }
+
+    @CrossOrigin
+    @RequestMapping(value = "book/{name}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getBook(@PathVariable("name") String name){
+        Book book = booksService.getItemByName(name);
+
+        if(book == null) {
+            return new ResponseEntity<>(book, HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        }    }
+
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteBook(@PathVariable("id") int id){
