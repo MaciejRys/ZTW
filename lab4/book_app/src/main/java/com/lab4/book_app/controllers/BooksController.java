@@ -16,7 +16,7 @@ public class BooksController {
     IBooksService booksService;
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Object> addBook(@RequestBody  String title, int authorId, int pages){
+    public ResponseEntity<Object> addBook(String title, int authorId, int pages){
         boolean result = booksService.addItem(title, authorId, pages);
 
         if(result) {
