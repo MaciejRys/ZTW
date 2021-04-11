@@ -4,7 +4,7 @@
       <router-link to="/">Home</router-link>
       <router-link to="/books">Books</router-link>
       <router-link to="/authors">Authors</router-link>
-      <router-link to="/BorrowTable">Borrows</router-link>
+      <router-link to="/borrows">Borrows</router-link>
     </nav>
   </header>
 </template>

@@ -50,7 +50,8 @@ public class BooksController {
             return new ResponseEntity<>(book, HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<>(book, HttpStatus.OK);
-        }    }
+        }
+    }
 
     @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

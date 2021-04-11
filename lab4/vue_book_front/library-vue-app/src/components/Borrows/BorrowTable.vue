@@ -1,5 +1,14 @@
 <template>
   <div id="borrow-table">
+    <button
+        @click="
+        $router.push({
+          name: 'BorrowForm',
+        })
+      "
+    >
+      Dodaj wypożyczenie
+    </button>
     <form>
     <table>
       <thead>
@@ -16,7 +25,7 @@
         <td>{{borrow.user}}</td>
         <td><button  @click="deleteBorrow(borrow.book)" >usuń wypożyczenie</button></td>
         <td><button  @click="$router.push({
-                  name: 'about-borrow',
+                  name: 'BorrowInfo',
                   params: { book: borrow.book, user: borrow.user },
                 })"> pokaż informację </button></td>
       </tr>
@@ -28,15 +37,9 @@
 <script>
 export default {
   name: 'borrow-table',
-  props: {
-    borrowSource: Array,
-  },
   data() {
     return {
       borrows: [],
-      borrow: {
-        book: ''
-      },
     }
   },
   methods: {

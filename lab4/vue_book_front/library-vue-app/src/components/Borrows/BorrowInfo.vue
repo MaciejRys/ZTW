@@ -4,13 +4,22 @@
     <div id="borrow-info">
       <form>
         <label>Tytuł</label>
-        <input type="text" />
+        <input type="text" disabled :value ="this.borrow.book.title" />
         <label>Autor</label>
-        <input type="text" />
+        <input type="text" disabled :value = "this.borrow.book.author" />
         <label>Liczba stron</label>
-        <input type="text" />
+        <input type="text" disabled :value = "this.borrow.book.pages" />
         <label>User</label>
-        <input type="text" />
+        <input type="text" disabled :value = "this.borrow.user" />
+        <button
+            @click="
+        $router.push({
+          name: 'BorrowTable',
+        })
+      "
+        >
+          Powrót
+        </button>
       </form>
     </div>
   </div>
@@ -33,17 +42,18 @@ export default {
   methods: {
     async getBorrowInfo(borrow) {
       try {
-        const response = await fetch('http://localhost:8081/books/book/' + borrow.book, {method:"GET",mode:"no-cors"})
-        this.borrow.book.title = response.title
-        this.borrow.book.pages = response.pages
-        this.borrow.book.author = response.author
+        const response = await fetch('http://localhost:8081/books/book/' + borrow.book)
+        const data = await response.json()
+        this.borrow.book.title = data.title
+        this.borrow.book.pages = data.pages
+        this.borrow.book.author = data.author.fullName
         this.borrow.user = borrow.user
       } catch (error) {
         console.error(error)
       }
     }
   }, mounted() {
-    this.getBorrowInfo();
+    this.getBorrowInfo(this.$route.params);
   },
 }
 </script>

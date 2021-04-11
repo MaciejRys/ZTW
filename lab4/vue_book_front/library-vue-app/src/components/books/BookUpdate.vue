@@ -9,7 +9,7 @@
         <input v-model="book.pages" name="pages" type="number" />
         <label>Author</label>
         <select v-model="book.author" name="author" type="text">
-          <option v-bind:value="author" v-for="author in authors" :key="author">
+          <option v-bind:value="author" v-for="author in authors" :key="author.id">
             {{ author.fullName }}
           </option>
         </select>

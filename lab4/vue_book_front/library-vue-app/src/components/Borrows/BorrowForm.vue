@@ -23,10 +23,6 @@
 <script>
 export default {
   name: 'borrow-form',
-  props: {
-    bookSource: Array,
-    userSource: Array,
-  },
   data() {
     return {
       books: [],
@@ -41,6 +37,9 @@ export default {
     addBorrow(borrow) {
       try {
         fetch('http://localhost:8081/rents/rent/' + borrow.book + '/' + borrow.user, {method:"POST",mode:"no-cors"})
+        this.$router.push({
+          name: "BorrowTable",
+        });
       } catch (error) {
         console.error(error)
       }
