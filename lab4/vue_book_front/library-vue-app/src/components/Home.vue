@@ -1,13 +1,15 @@
 <template>
-  <p>Home</p>
+  <p>
+    Home
+    HomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHome
+  </p>
 </template>
 
 <script>
 export default {
-    name: 'Home',
-}
+  name: "Home",
+};
 </script>
 
 <style>
-
 </style>

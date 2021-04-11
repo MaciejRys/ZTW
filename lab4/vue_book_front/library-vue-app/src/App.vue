@@ -1,14 +1,21 @@
 <template>
   <div id="app" class="small-container">
+    <header-comp/>
     <router-view></router-view>
+    <footer-comp/>
   </div>
 </template>
 <script>
+import FooterComp from './components/FooterComp.vue'
+import HeaderComp from './components/HeaderComp.vue'
 
 
 export default {
   name: 'app',
-
+  components: {
+    HeaderComp,
+    FooterComp
+  }
 }
 </script>
 <style>
