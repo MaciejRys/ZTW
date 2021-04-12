@@ -40,17 +40,17 @@ const routes = [
     component: () => import('@/components/authors/AuthorForm.vue')
   },
   {
-    path: '/Borrows/Add',
+    path: '/borrows/add',
     name: 'BorrowForm',
     component: () => import('@/components/Borrows/BorrowForm.vue')
   },
   {
-    path: '/Borrows',
+    path: '/borrows',
     name: 'BorrowTable',
     component: () => import('@/components/Borrows/BorrowTable.vue')
   },
   {
-    path: '/Borrows/Info/:book/:user',
+    path: '/borrows/info/:book/:user',
     name: 'BorrowInfo',
     component: () => import('@/components/Borrows/BorrowInfo.vue')
   }
@@ -61,7 +61,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
-router.replace({ path: '*', redirect: '/' })
 
 export default router

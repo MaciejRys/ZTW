@@ -61,4 +61,7 @@ export default {
 form {
   margin-bottom: 2rem;
 }
+.small-container{
+  margin-top: 4rem;
+}
 </style>

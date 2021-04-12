@@ -26,12 +26,21 @@
         <td><button  @click="deleteBorrow(borrow.book)" >usuń wypożyczenie</button></td>
         <td><button  @click="$router.push({
                   name: 'BorrowInfo',
-                  params: { book: borrow.book, user: borrow.user },
+                  params: { book: borrow.book, user: borrow.user }
                 })"> pokaż informację </button></td>
       </tr>
       </tbody>
     </table>
     </form>
+    <button
+        @click="
+                  $router.push({
+                    name: 'BorrowForm'
+                  })
+                "
+    >
+      Dodaj Wypożyczenie
+    </button>
   </div>
 </template>
 <script>
@@ -46,12 +55,7 @@ export default {
     deleteBorrow(book) {
       try {
         fetch('http://localhost:8081/rents/free/' + book, {method:"POST",mode:"no-cors"})
-      } catch (error) {
-        console.error(error)
-      }
-    },infoBorrow(borrow) {
-      try {
-        fetch('http://localhost:8081/books/' + borrow.book, {method:"POST",mode:"no-cors"})
+        this.getBorrows();
       } catch (error) {
         console.error(error)
       }
@@ -76,4 +80,6 @@ export default {
   },
 }
 </script>
-<style scoped></style>
+<style scoped>
+
+</style>

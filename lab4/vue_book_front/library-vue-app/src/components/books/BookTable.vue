@@ -39,6 +39,15 @@
           </tr>
         </tbody>
       </table>
+      <button
+          @click="
+                  $router.push({
+                    name: 'BookForm'
+                  })
+                "
+      >
+        Dodaj Książke
+      </button>
     </div>
   </div>
 </template>
@@ -51,8 +60,14 @@ export default {
       books: [],
     };
   },
+  watch: {
+    // call again the method if the route changes
+    '$route': 'getBooks'
+  },
   methods: {
     async getBooks() {
+      await new Promise(resolve => setTimeout(resolve, 100))
+      this.books = []
       try {
         const response = await fetch("http://localhost:8081/books");
         const data = await response.json();
@@ -88,4 +103,7 @@ export default {
 </script>
 
 <style>
+button {
+  margin-right: 10px;
+}
 </style>

@@ -35,6 +35,15 @@
           </tr>
         </tbody>
       </table>
+      <button
+          @click="
+                  $router.push({
+                    name: 'AuthorForm'
+                  })
+                "
+      >
+        Dodaj Autora
+      </button>
     </div>
   </div>
 </template>
@@ -46,9 +55,14 @@ export default {
     return {
       authors: [],
     };
+  },  watch: {
+    // call again the method if the route changes
+    '$route': 'getAuthors'
   },
   methods: {
     async getAuthors() {
+      await new Promise(resolve => setTimeout(resolve, 100))
+      this.authors = []
       try {
         const response = await fetch("http://localhost:8081/authors");
         const data = await response.json();
@@ -82,4 +96,7 @@ export default {
 </script>
 
 <style>
+button {
+  margin-right: 10px;
+}
 </style>

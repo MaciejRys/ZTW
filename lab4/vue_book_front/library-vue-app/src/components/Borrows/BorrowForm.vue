@@ -5,13 +5,13 @@
     <form>
       <label>Tytuł - autor</label>
       <select v-model="borrow.book"  name="book" type="text" >
-      <option v-for="book in books" :key="book">
+      <option v-for="book in books" :key="book.id">
         {{book}}
       </option>
       </select>
       <label>User</label>
       <select v-model="borrow.user"  name="user" type="text" >
-        <option v-for="user in users" :key="user">
+        <option v-for="user in users" :key="user.id">
           {{user}}
         </option>
       </select>
@@ -77,5 +77,8 @@ export default {
 <style scoped>
 form {
   margin-bottom: 2rem;
+}
+.small-container {
+  margin-top: 4rem;
 }
 </style>
