@@ -51,8 +51,25 @@ const resolvers = {
         user: (parent, args, context, info) => {
             return usersList.find(u => u.id == parent.user_id);
         }
-    }, 
+    },
+    Mutation: {
+        addTodo: (parent, args, context, info) => addTodo(parent, args, context, info),
+        addUser: (parent, args, context, info) => addUser(parent, args, context, info)
+    }
+}
 
+function addTodo(parent, args, context, info){
+    var lastTodo = todosList[todosList.length - 1];
+    const ToDo = {id: lastTodo.id + 1,title: args.ToDo.title, completed: args.ToDo.completed, user_id: args.ToDo.userId }
+    todosList.push(ToDo)
+    return ToDo;
+}
+
+function addUser(parent, args, context, info){
+    var lastUser = usersList[usersList.length - 1];
+    const User = {id: lastUser.id + 1,name: args.User.name, email: args.User.email, login: args.User.login }
+    usersList.push(User)
+    return User;
 }
 
 function todoById(parent, args, context, info) {

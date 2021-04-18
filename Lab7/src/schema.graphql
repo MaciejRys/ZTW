@@ -18,4 +18,21 @@ type Query {
  todo(id: ID!): ToDoItem
  users: [User!]
  user(id: ID!): User
-} 
+}
+
+type Mutation {
+ addTodo(ToDo: AddTodoInput!): ToDoItem!
+ addUser(User: AddUserInput!): User!
+}
+
+input AddTodoInput {
+  title: String!,
+  completed: Boolean!,
+  userId: ID!
+}
+
+input AddUserInput {
+  name: String!,
+  email: String!,
+  login: String!
+}
