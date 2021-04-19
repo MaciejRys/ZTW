@@ -21,11 +21,15 @@ type Query {
 }
 
 type Mutation {
- addTodo(ToDo: AddTodoInput!): ToDoItem!
+ addToDo(ToDo: AddToDoInput!): ToDoItem!
+ updateToDo(id : ID!,ToDo: AddToDoInput!): ToDoItem!
+ removeToDo(id: ID!): ToDoItem!
  addUser(User: AddUserInput!): User!
+ updateUser(id : ID!,User: AddUserInput!): User!
+ removeUser(id: ID!): User!
 }
 
-input AddTodoInput {
+input AddToDoInput {
   title: String!,
   completed: Boolean!,
   userId: ID!

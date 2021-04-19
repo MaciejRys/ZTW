@@ -53,24 +53,65 @@ const resolvers = {
         }
     },
     Mutation: {
-        addTodo: (parent, args, context, info) => addTodo(parent, args, context, info),
-        addUser: (parent, args, context, info) => addUser(parent, args, context, info)
+        addToDo: (parent, args, context, info) => addToDo(parent, args, context, info),
+        updateToDo: (parent, args, context, info) => updateToDo(parent, args, context, info),
+        removeToDo: (parent, args, context, info) => removeToDo(parent, args, context, info),
+        addUser: (parent, args, context, info) => addUser(parent, args, context, info),
+        updateUser: (parent, args, context, info) => updateUser(parent, args, context, info),
+        removeUser: (parent, args, context, info) => removeUser(parent, args, context, info),
+
     }
 }
 
-function addTodo(parent, args, context, info){
-    var lastTodo = todosList[todosList.length - 1];
+function addToDo(parent, args, context, info){
+    const lastTodo = todosList[todosList.length - 1];
     const ToDo = {id: lastTodo.id + 1,title: args.ToDo.title, completed: args.ToDo.completed, user_id: args.ToDo.userId }
     todosList.push(ToDo)
     return ToDo;
 }
 
+function updateToDo(parent, args, context, info){
+    const Todo = todosList.find(t => t.id == args.id);
+    Todo.title = args.ToDo.title;
+    Todo.completed = args.ToDo.completed;
+    Todo.user_id = args.ToDo.userId;
+    return Todo;
+}
+
+function removeToDo(parent, args, context, info){
+    const Todo = todosList.find(t => t.id == args.id);
+    const index = todosList.indexOf(Todo);
+    if (index > -1) {
+        todosList.splice(index, 1);
+    }
+    return Todo;
+}
+
 function addUser(parent, args, context, info){
-    var lastUser = usersList[usersList.length - 1];
+    const lastUser = usersList[usersList.length - 1];
     const User = {id: lastUser.id + 1,name: args.User.name, email: args.User.email, login: args.User.login }
     usersList.push(User)
     return User;
 }
+
+
+function updateUser(parent, args, context, info){
+    const User = usersList.find(t => t.id == args.id);
+    User.name = args.User.name;
+    User.email = args.User.email;
+    User.login = args.User.login;
+    return User;
+}
+
+function removeUser(parent, args, context, info){
+    const User = usersList.find(t => t.id == args.id);
+    const index = usersList.indexOf(User);
+    if (index > -1) {
+        usersList.splice(index, 1);
+        return User;
+    }
+}
+
 
 function todoById(parent, args, context, info) {
     return todosList.find(t => t.id == args.id);
