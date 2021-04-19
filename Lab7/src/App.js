@@ -32,13 +32,13 @@ async function getRestUsersList() {
             email: email,
             login: username,
         }))
-        // for (var i = 0; i < usersList.length; i++){
-        //     var sql = `INSERT INTO users (name, email, login) VALUES ( '${usersList[i].name}', '${usersList[i].email}', '${usersList[i].login}');`;
-        //     con.query(sql, function (err, result) {
-        //         if (err) throw err;
-        //     });
-        //
-        // }
+        for (var i = 0; i < usersList.length; i++){
+            var sql = `INSERT INTO users (name, email, login) VALUES ( '${usersList[i].name}', '${usersList[i].email}', '${usersList[i].login}');`;
+            con.query(sql, function (err, result) {
+                if (err) throw err;
+            });
+
+        }
 
     } catch (error) {
         throw error
@@ -56,19 +56,19 @@ async function getRestTodosList() {
             user_id: userId,
         }))
 
-        // for (var i = 0; i < todosList.length; i++){
-        //     var sql = `INSERT INTO todos (title, completed, userId) VALUES ( '${todosList[i].title}', '${todosList[i].completed}', '${todosList[i].user_id}');`;
-        //     con.query(sql, function (err, result) {
-        //         if (err) throw err;
-        //     });
-        //
-        // }
+        for (var i = 0; i < todosList.length; i++){
+            var sql = `INSERT INTO todos (title, completed, userId) VALUES ( '${todosList[i].title}', '${todosList[i].completed}', '${todosList[i].user_id}');`;
+            con.query(sql, function (err, result) {
+                if (err) throw err;
+            });
+
+        }
     } catch (error) {
         throw error
     }
 } 
-// getRestUsersList();
-// getRestTodosList();
+getRestUsersList();
+getRestTodosList();
 
 const { GraphQLServer } = require('graphql-yoga');
 const resolvers = {
@@ -139,7 +139,6 @@ function addToDo(parent, args, context, info){
 
 function updateToDo(parent, args, context, info){
     return new Promise(function(resolve, reject){
-        console.log(args);
         con.query(`UPDATE todos SET title = '${args.ToDo.title}', completed = '${args.ToDo.completed}', userId = '${args.ToDo.userId}' WHERE id = '${args.id}';`,
             function(err, rows){
                 if(rows === undefined){
@@ -183,7 +182,6 @@ function addUser(parent, args, context, info){
 
 function updateUser(parent, args, context, info){
     return new Promise(function(resolve, reject){
-        console.log(args);
         con.query(`UPDATE users SET name = '${args.User.name}', email = '${args.User.email}', login = '${args.User.login}' WHERE id = '${args.id}';`,
             function(err, rows){
                 if(rows === undefined){
@@ -258,7 +256,6 @@ function userOfTodo(parent, args, context, info){
                 if(rows === undefined){
                     reject(new Error("Error rows is undefined"));
                 }else{
-                    console.log(rows);
                     resolve(rows[0]);
                 }
             }
