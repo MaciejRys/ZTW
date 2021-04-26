@@ -84,7 +84,7 @@ module.exports = {
           // For any node of type MarkdownRemark, list how to resolve the fields` values
           MarkdownRemark: {
             title: node => node.frontmatter.title,
-            path: node => "\\" + node.fields.slug,
+            path: node => 'http://localhost:8000' + node.fields.slug,
           },
         },
         // Optional filter to limit indexed nodes
